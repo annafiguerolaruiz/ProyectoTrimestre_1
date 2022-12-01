@@ -18,6 +18,7 @@ public class AF_GameManager : MonoBehaviour
     void Start()
     {
         SpawnStickWave(1);
+        Round = 1;
     }
 
      void Update()
@@ -34,7 +35,7 @@ public class AF_GameManager : MonoBehaviour
 
        if (Round >= 30)
         {
-            SceneManager.LoadScene("AF_Win");
+            SceneManager.LoadScene("AF_Wine");
         }
     }
 
