@@ -9,27 +9,32 @@ public class AF_ScoreManager : MonoBehaviour
 
     public TextMeshProUGUI Round;
     public TextMeshProUGUI username;
+    public int R;
+    public string N;
 
-    private void Awake()
-    {
-        if (sharedInstance == null)
-        {
-            sharedInstance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
 
     void Start()
     {
         ApplyUserOptions();
     }
+    void Update()
+    {
+        SaveUserOptions();
+    }
 
     public void ApplyUserOptions()
     {
-        Round.text = AF_DataPersistents.sharedInstance.LastRound.ToString();
-        username.text = AF_DataPersistents.sharedInstance.NamePlayer;
+        R = PlayerPrefs.GetInt("LAST_ROUND");
+        Round.text = R.ToString();
+        N = PlayerPrefs.GetString("NAME_PLAYER");
+        username.text = N.ToString();
+
+    }
+    public void SaveUserOptions()
+    {
+        AF_DataPersistents.sharedInstance.LastRound = R;
+        AF_DataPersistents.sharedInstance.NamePlayer = N;
+        AF_DataPersistents.sharedInstance.Data();
+
     }
 }

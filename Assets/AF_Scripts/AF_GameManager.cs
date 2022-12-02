@@ -15,7 +15,8 @@ public class AF_GameManager : MonoBehaviour
     public GameObject Hand;
     public static AF_GameManager sharedInstance;
     public bool GO;
-
+    public TextMeshProUGUI time;
+    public float timeValue;
     private void Awake()
     {
         if (sharedInstance == null)
@@ -36,6 +37,14 @@ public class AF_GameManager : MonoBehaviour
 
      void Update()
     {
+        if (timeValue > 0)
+        {
+            timeValue -= Time.deltaTime;
+        }
+        else
+        {
+            timeValue = 0;
+        }
         GO = FindObjectOfType<AF_Stickj>().GameOver;
         RoundTEXT.text = Round.ToString();
 
@@ -56,6 +65,7 @@ public class AF_GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("AF_GameOver");
             AF_DataPersistents.sharedInstance.LastRound = Round;
+            AF_DataPersistents.sharedInstance.Data();
         }
     }
 
@@ -85,6 +95,19 @@ public class AF_GameManager : MonoBehaviour
         Time.timeScale = 1;
         Pause.SetActive(false); 
         Hand.SetActive(true);
+    }
+    void DisplayTime(float timeToDisplay)
+    {
+        if (timeToDisplay < 0)
+        {
+            timeToDisplay = 0;
+        }
+
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        float milliseconds = timeToDisplay % 1 * 1000;
+
+        time.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
 }
