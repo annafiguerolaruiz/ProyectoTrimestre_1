@@ -573,6 +573,9 @@ MonoBehaviour:
   RoundTEXT: {fileID: 115201903}
   Pause: {fileID: 290505449794579506}
   Hand: {fileID: 917911294748539304}
+  GO: 0
+  time: {fileID: 775295196}
+  timeValue: 5
 --- !u!114 &385887767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,7 +704,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1024c54f0ba284a49acbf21d5de89a0e, type: 2}
   m_sharedMaterial: {fileID: 2097634105178505791, guid: 1024c54f0ba284a49acbf21d5de89a0e, type: 2}

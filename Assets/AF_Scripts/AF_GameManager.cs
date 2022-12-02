@@ -45,6 +45,7 @@ public class AF_GameManager : MonoBehaviour
         {
             timeValue = 0;
         }
+        //DisplayTime(timeValue);
         GO = FindObjectOfType<AF_Stickj>().GameOver;
         RoundTEXT.text = Round.ToString();
 
@@ -52,8 +53,12 @@ public class AF_GameManager : MonoBehaviour
 
        if (SticksLeft <= 0)
         {
-            Round++;
-            SpawnStickWave(SticksForWave);
+            if (timeValue <=0)
+            {
+                Round++;
+                SpawnStickWave(SticksForWave);
+            }
+           
         }
 
        if (Round >= 30)
