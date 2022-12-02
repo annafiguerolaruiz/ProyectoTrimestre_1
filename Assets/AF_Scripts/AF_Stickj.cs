@@ -12,6 +12,7 @@ public class AF_Stickj : MonoBehaviour
     public bool Catch;
     public GameObject Hand;
     public AF_GameManager GM;
+    public bool GameOver;
     void Start()
     {
         speed = Random.Range(8, 20);
@@ -19,6 +20,7 @@ public class AF_Stickj : MonoBehaviour
         RangeY = Random.Range(1, 3);
         transform.localScale = new Vector3(0.4f,RangeY);
         Catch = false;
+        GameOver = false;
         
     }
 
@@ -33,7 +35,8 @@ public class AF_Stickj : MonoBehaviour
         }
         if (transform.position.y <=-5)
         {
-            SceneManager.LoadScene("AF_GameOver");
+            
+            GameOver = true;
         }
     }
 

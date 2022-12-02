@@ -13,16 +13,30 @@ public class AF_GameManager : MonoBehaviour
     public TextMeshProUGUI RoundTEXT;
     public GameObject Pause;
     public GameObject Hand;
+    public static AF_GameManager sharedInstance;
+    public bool GO;
 
-
+    private void Awake()
+    {
+        if (sharedInstance == null)
+        {
+            sharedInstance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     void Start()
     {
         SpawnStickWave(1);
         Round = 1;
+
     }
 
      void Update()
     {
+        GO = FindObjectOfType<AF_Stickj>().GameOver;
         RoundTEXT.text = Round.ToString();
 
         SticksLeft = FindObjectsOfType<AF_Stickj>().Length;
@@ -36,6 +50,12 @@ public class AF_GameManager : MonoBehaviour
        if (Round >= 30)
         {
             SceneManager.LoadScene("AF_Wine");
+            AF_DataPersistents.sharedInstance.LastRound = Round;
+        }
+       if (GO == true)
+        {
+            SceneManager.LoadScene("AF_GameOver");
+            AF_DataPersistents.sharedInstance.LastRound = Round;
         }
     }
 

@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class AF_DataPersistents : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static AF_DataPersistents sharedInstance;
+    public int LastRound;
+    public string NamePlayer;
+
+    private void Awake()
     {
-        
+        if (sharedInstance == null)
+        {
+            sharedInstance = this;
+            DontDestroyOnLoad(sharedInstance);
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Data()
     {
-        
+        PlayerPrefs.SetString("NAME_PLAYER", NamePlayer);
+        PlayerPrefs.SetInt("LAST_ROUND", LastRound);
     }
 }
