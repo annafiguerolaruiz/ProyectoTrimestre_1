@@ -15,6 +15,9 @@ public class AF_GameManager : MonoBehaviour
     public GameObject Hand;
     public static AF_GameManager sharedInstance;
     public bool GO;
+    public float Counter = 10;
+    public TextMeshProUGUI TEXTtime;
+    public bool startGame = false;
 
     private void Awake()
     {
@@ -31,36 +34,39 @@ public class AF_GameManager : MonoBehaviour
     {
         SpawnStickWave(1);
         Round = 1;
-        Time.timeScale = 1;
+        Time.timeScale = 1;        
     }
 
      void Update()
-    {
-       
+     {
+        if (Counter > 0)
+        {
+            UpdateTime();
+        }
         //GO = FindObjectOfType<AF_Stickj>().GameOver;
         RoundTEXT.text = Round.ToString();
 
         SticksLeft = FindObjectsOfType<AF_Stickj>().Length;
 
        if (SticksLeft <= 0)
-        {
+       {
             Round++;
             SpawnStickWave(SticksForWave);
 
-        }
+       }
 
        if (Round >= 30)
-        {
+       {
             SceneManager.LoadScene("AF_Wine");
             AF_DataPersistents.sharedInstance.LastRound = Round;
-        }
+       }
        if (GO == true)
-        {
+       {
             SceneManager.LoadScene("AF_GameOver");
             AF_DataPersistents.sharedInstance.LastRound = Round;
             AF_DataPersistents.sharedInstance.Data();
-        }
-    }
+       }
+     }
 
      private void SpawnStick()
      {
@@ -99,6 +105,18 @@ public class AF_GameManager : MonoBehaviour
             AF_DataPersistents.sharedInstance.Data();
         }
     }
+    public void UpdateTime()
+    {
+        Counter -= Time.deltaTime;
+        //No milliseconds
+        TEXTtime.text = Mathf.Round(Counter).ToString();
+        if (Counter <=0)
+        {
+            TEXTtime.gameObject.SetActive(false);
+            startGame = true;
+        }
+    }
+
 
 
 }

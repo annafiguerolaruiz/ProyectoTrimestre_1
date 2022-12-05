@@ -13,8 +13,10 @@ public class AF_Stickj : MonoBehaviour
     public GameObject Hand;
     public AF_GameManager GM;
     public bool GameOver;
+    private AF_GameManager GameManagerScript;
     void Start()
     {
+        GameManagerScript = FindObjectOfType<AF_GameManager>();
         speed = Random.Range(8, 20);
 
         RangeY = Random.Range(1, 3);
@@ -26,18 +28,22 @@ public class AF_Stickj : MonoBehaviour
 
      void Update()
     {
-        Hand =  GameObject.FindGameObjectWithTag("Hand");
+        if (GameManagerScript.startGame == true)
+        {
+            Hand = GameObject.FindGameObjectWithTag("Hand");
 
-        transform.Translate(Vector2.down * speed * Time.deltaTime);
-        if (Catch == true)
-        {
-            Hand.transform.position = new Vector2(position.x, Hand.transform.position.y);
+            transform.Translate(Vector2.down * speed * Time.deltaTime);
+            if (Catch == true)
+            {
+                Hand.transform.position = new Vector2(position.x, Hand.transform.position.y);
+            }
+            if (transform.position.y <= -5)
+            {
+
+                GameOver = true;
+            }
         }
-        if (transform.position.y <=-5)
-        {
-            
-            GameOver = true;
-        }
+       
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
