@@ -15,8 +15,7 @@ public class AF_GameManager : MonoBehaviour
     public GameObject Hand;
     public static AF_GameManager sharedInstance;
     public bool GO;
-    public TextMeshProUGUI time;
-    public float timeValue;
+
     private void Awake()
     {
         if (sharedInstance == null)
@@ -32,33 +31,22 @@ public class AF_GameManager : MonoBehaviour
     {
         SpawnStickWave(1);
         Round = 1;
-
+        Time.timeScale = 1;
     }
 
      void Update()
     {
-        if (timeValue > 0)
-        {
-            timeValue -= Time.deltaTime;
-        }
-        else
-        {
-            timeValue = 0;
-        }
-        //DisplayTime(timeValue);
-        GO = FindObjectOfType<AF_Stickj>().GameOver;
+       
+        //GO = FindObjectOfType<AF_Stickj>().GameOver;
         RoundTEXT.text = Round.ToString();
 
         SticksLeft = FindObjectsOfType<AF_Stickj>().Length;
 
        if (SticksLeft <= 0)
         {
-            if (timeValue <=0)
-            {
-                Round++;
-                SpawnStickWave(SticksForWave);
-            }
-           
+            Round++;
+            SpawnStickWave(SticksForWave);
+
         }
 
        if (Round >= 30)
@@ -90,8 +78,8 @@ public class AF_GameManager : MonoBehaviour
 
     public void GPause()
     {
-        Pause.SetActive(true);
         Time.timeScale = 0f;
+        Pause.SetActive(true);
         Hand.SetActive(false);
     }
 
@@ -101,18 +89,16 @@ public class AF_GameManager : MonoBehaviour
         Pause.SetActive(false); 
         Hand.SetActive(true);
     }
-    void DisplayTime(float timeToDisplay)
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (timeToDisplay < 0)
+        if (collision.gameObject.CompareTag("Palo"))
         {
-            timeToDisplay = 0;
+            SceneManager.LoadScene("AF_GameOver");
+            AF_DataPersistents.sharedInstance.LastRound = Round;
+            AF_DataPersistents.sharedInstance.Data();
         }
-
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        float milliseconds = timeToDisplay % 1 * 1000;
-
-        time.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
 
 }

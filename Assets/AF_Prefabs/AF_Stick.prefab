@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6350258992829446483}
   - component: {fileID: 6350258992829446484}
   - component: {fileID: 6350258992829446481}
+  - component: {fileID: 8829453759788589428}
   m_Layer: 0
   m_Name: AF_Stick
-  m_TagString: Untagged
+  m_TagString: Palo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,3 +130,25 @@ MonoBehaviour:
   Catch: 0
   Hand: {fileID: 0}
   GM: {fileID: 0}
+  GameOver: 0
+--- !u!50 &8829453759788589428
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350258992829446486}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
