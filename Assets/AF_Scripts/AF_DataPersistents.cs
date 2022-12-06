@@ -23,7 +23,9 @@ public class AF_DataPersistents : MonoBehaviour
 
     public void Data()
     {
+        // We save the username with persistent data
         PlayerPrefs.SetString("NAME_PLAYER", NamePlayer);
+        // We save the round number with persistent data
         PlayerPrefs.SetInt("LAST_ROUND", LastRound);
     }
 }

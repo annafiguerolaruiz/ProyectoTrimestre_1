@@ -14,6 +14,8 @@ public class AF_Stickj : MonoBehaviour
     public AF_GameManager GM;
     public bool GameOver;
     private AF_GameManager GameManagerScript;
+
+    //The clubs appear with a speed and a position in the X random
     void Start()
     {
         GameManagerScript = FindObjectOfType<AF_GameManager>();
@@ -25,7 +27,7 @@ public class AF_Stickj : MonoBehaviour
         GameOver = false;
         
     }
-
+    //The sticks move down according to the illuminated speed
      void Update()
     {
         if (GameManagerScript.startGame == true)
@@ -45,7 +47,7 @@ public class AF_Stickj : MonoBehaviour
         }
        
     }
-
+    //When the clubs collide with the co-leader of the hand the speed will be 0
     public void OnTriggerEnter2D(Collider2D collision)
     {
         position.x = collision.gameObject.transform.position.x;
@@ -59,7 +61,7 @@ public class AF_Stickj : MonoBehaviour
     
 
     }
-
+    //When the sticks collide with the co-leader of the hand, they are destroyed
     public void OnTriggerExit2D(Collider2D collision)
     {
         Catch = false;

@@ -13,12 +13,13 @@ public class AF_Sprite : MonoBehaviour
     private int m_IndexSprite;
     Coroutine m_CorotineAnim;
     bool IsDone;
+
     public void Start()
     {
         IsDone = false;
         StartCoroutine(Func_PlayAnimUI());
     }
-
+    //We get the sprite to be displayed above the canvas together with its animation
     IEnumerator Func_PlayAnimUI()
     {
         yield return new WaitForSeconds(m_Speed);

@@ -12,12 +12,7 @@ public class AF_OptionsManager : MonoBehaviour
     {
         LoadUserOptions();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //Load the data persistence of the username text
     public void SaveUserOptions()
     {
         AF_DataPersistents.sharedInstance.NamePlayer = Name.text;

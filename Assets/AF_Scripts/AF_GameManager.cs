@@ -39,6 +39,7 @@ public class AF_GameManager : MonoBehaviour
 
      void Update()
      {
+        //Counter
         if (Counter > 0)
         {
             UpdateTime();
@@ -47,8 +48,8 @@ public class AF_GameManager : MonoBehaviour
         RoundTEXT.text = Round.ToString();
 
         SticksLeft = FindObjectsOfType<AF_Stickj>().Length;
-
-       if (SticksLeft <= 0)
+        //Every time a suit is eliminated or there is no suit in the scene, a new suit will be instantiated
+        if (SticksLeft <= 0)
        {
             Round++;
             SpawnStickWave(SticksForWave);
@@ -57,11 +58,13 @@ public class AF_GameManager : MonoBehaviour
 
        if (Round >= 30)
        {
-            SceneManager.LoadScene("AF_Wine");
+            //When you reach the maximum number of rounds(30), the Win screen will appear.
+           SceneManager.LoadScene("AF_Wine");
             AF_DataPersistents.sharedInstance.LastRound = Round;
        }
        if (GO == true)
        {
+            //When you do not grab one of the sticks the Lose screen will appear
             SceneManager.LoadScene("AF_GameOver");
             AF_DataPersistents.sharedInstance.LastRound = Round;
             AF_DataPersistents.sharedInstance.Data();
@@ -81,21 +84,21 @@ public class AF_GameManager : MonoBehaviour
             SpawnStick();
         }
     }
-
+    //When we press the pause button we will stop time and the pause menu will appear
     public void GPause()
     {
         Time.timeScale = 0f;
         Pause.SetActive(true);
         Hand.SetActive(false);
     }
-
+    //When we press the game button, we will restart the game from where we left it before pausing
     public void GResume()
     {
         Time.timeScale = 1;
         Pause.SetActive(false); 
         Hand.SetActive(true);
     }
-
+    //When a stick collides with the colider, the Game Over will appear
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Palo"))
@@ -105,6 +108,7 @@ public class AF_GameManager : MonoBehaviour
             AF_DataPersistents.sharedInstance.Data();
         }
     }
+    // When the game starts, a counter will appear to indicate when the game will start
     public void UpdateTime()
     {
         Counter -= Time.deltaTime;
